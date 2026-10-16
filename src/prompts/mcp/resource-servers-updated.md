@@ -1,0 +1,1 @@
+MCP resource servers now available: {{servers}}. This list supersedes any shown in the system prompt; use list_mcp_resources, list_mcp_resource_templates, or read_mcp_resource with one of these names as the server argument.

@@ -1,0 +1,1 @@
+Search your earlier conversations in this workspace: what the person wrote, your replies and reasoning, and the tools you ran with their results. Every word of `query` must appear in one entry; put an exact phrase in double quotes. Newest conversations first. Give `conversation` to search only that conversation, or `conversation` with `seq` to read one entry in full.

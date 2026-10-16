@@ -1,0 +1,1 @@
+Your previous response reached the output token limit and was cut off before it finished, so none of its tool calls were run. Continue from where it stopped in a smaller step: keep your reasoning short, make one tool call at a time, and split a large file write into several smaller writes or edits.

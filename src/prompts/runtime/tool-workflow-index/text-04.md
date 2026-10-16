@@ -1,0 +1,1 @@
+Use {{value_1}} for independent or multi-stage work that benefits from coordinated subagents, phases, and structured results. Write a JavaScript script using the documented workflow API. For one or two simple delegations, prefer plain subagent calls. Run in the background when other useful work can proceed; collect the job result before claiming that work is complete.

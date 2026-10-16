@@ -1,0 +1,1 @@
+Default exact. trailing-whitespace first tries exact matching, then complete-line matching that ignores trailing spaces/tabs only. Leading indentation, quotes, Unicode, and punctuation remain significant. Ambiguous matches are always rejected unless replace_all is true.

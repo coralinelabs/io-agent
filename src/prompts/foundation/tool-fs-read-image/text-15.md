@@ -1,0 +1,1 @@
+cannot read "{{value_1}}": the {{value_2}} extension declares {{value_3}}, but the bytes use a different image format; rename the file to match its actual format if it is PNG/JPEG/WebP/GIF, or convert it to one of those formats

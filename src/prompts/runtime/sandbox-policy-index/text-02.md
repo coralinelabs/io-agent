@@ -1,0 +1,1 @@
+Current file policy: read-only. Any available operation enforced by the file sandbox cannot modify files in the standing mode. Do not refuse a required modification from this policy alone: try an available tool normally and follow any denial and escalation guidance it returns.

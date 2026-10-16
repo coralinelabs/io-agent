@@ -1,0 +1,1 @@
+Current file policy: workspace-write. Any available operation enforced by the file sandbox may modify files under the session workspace: {{value_1}}. Some platform temporary areas may also be writable.

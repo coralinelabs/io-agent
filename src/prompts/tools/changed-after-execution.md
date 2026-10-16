@@ -1,0 +1,1 @@
+Tool "{{name}}" was withdrawn or replaced before a replacement result could be accepted. Its original body may already have completed. Do not repeat a potentially mutating operation just to recover its result; inspect the recorded outcome first.

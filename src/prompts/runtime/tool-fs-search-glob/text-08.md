@@ -1,0 +1,1 @@
+Find files whose paths match a glob pattern. Returns matching file paths — never directories — including hidden and ignored files (VCS metadata directories are excluded). Up to {{value_1}} paths come back in modification-time order; {{value_2}}, says so, and reports where the complete sorted list was saved. This tool does not enumerate directory entries.

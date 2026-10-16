@@ -1,0 +1,1 @@
+Wake yourself later without keeping the turn open: when a background job finishes or prints a matching line, when a process exits, when a file appears or changes, when a URL answers, or at a time. Give one condition. A watcher wakes you once: when its condition holds, or at its deadline (default {{minutes}} minutes).

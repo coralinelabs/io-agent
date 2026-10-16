@@ -1,0 +1,1 @@
+Read or curate bounded project memory shared by future sessions. Use list to obtain current entries and revision. For put or delete, pass that revision to detect concurrent changes. Writes may require approval; child agents can read but cannot mutate shared memory. Use compact stable facts, never secrets or temporary task logs.

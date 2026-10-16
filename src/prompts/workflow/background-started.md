@@ -1,0 +1,1 @@
+Workflow "{{name}}" is running as job {{job_id}} (run {{run_id}}). Its completion wakes this session. Use job_output for progress/results and job_kill to cancel. This script is not automatically replayed after a runtime restart.

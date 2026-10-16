@@ -1,0 +1,1 @@
+ Normalized copy (read-only; may be resized or re-encoded): {{value_1}} ({{value_2}}x{{value_3}}px, {{value_4}}). Source dimensions, format, and byte size may differ. Copy to a writable path ending in {{value_5}} before editing.

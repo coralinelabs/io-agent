@@ -1,0 +1,99 @@
+{
+  "name": "@coralinelabs/io-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Headless coding agent: explicit policy loop, editable prompts, cohesive implementation library.",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "packageManager": "pnpm@11.7.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./host": {
+      "types": "./dist/library/host/index.d.ts",
+      "import": "./dist/library/host/index.js"
+    },
+    "./package.json": "./package.json",
+    "./integrations": {
+      "types": "./dist/library/integrations/external-agents.d.ts",
+      "import": "./dist/library/integrations/external-agents.js"
+    },
+    "./extensions": {
+      "types": "./dist/library/extensions/index.d.ts",
+      "import": "./dist/library/extensions/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "LICENSE-DEEPSEEK",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES.md",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "node scripts/prompts/generate.mjs && node scripts/build-native.mjs && tsc -b tsconfig.json && node scripts/copy-resources.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "prompts:generate": "node scripts/prompts/generate.mjs",
+    "prompts:check": "node scripts/prompts/generate.mjs --check && node scripts/prompts/audit.mjs",
+    "test:prompts": "node --test scripts/prompts/generate.test.mjs scripts/prompts/audit.test.mjs",
+    "check:architecture": "node scripts/check-architecture.mjs",
+    "notices": "node scripts/third-party-notices.mjs",
+    "notices:check": "node scripts/third-party-notices.mjs --check",
+    "test:built": "node scripts/check-built-entries.mjs && node scripts/smoke.mjs && node scripts/smoke-host.mjs",
+    "source:zip": "python3 scripts/source_zip.py",
+    "release": "node scripts/release.mjs",
+    "bench:headless": "node scripts/benchmark-headless.mjs",
+    "test:bench": "node --test scripts/benchmark-headless.test.mjs"
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "1.0.2",
+    "@joplin/turndown-plugin-gfm": "1.0.67",
+    "@modelcontextprotocol/client": "2.2.0",
+    "@standard-schema/spec": "1.1.0",
+    "@vscode/ripgrep": "1.18.0",
+    "chokidar": "5.0.0",
+    "diff": "9.0.0",
+    "ipaddr.js": "2.5.0",
+    "koffi": "3.1.1",
+    "node-pty": "1.2.0-beta.15",
+    "sharp": "0.35.5",
+    "turndown": "7.2.4",
+    "undici": "8.10.2",
+    "yaml": "2.9.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/server": "2.2.0",
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "22.20.1",
+    "@types/turndown": "5.0.6",
+    "eventsource-parser": "3.1.0",
+    "execa": "10.0.1",
+    "fast-check": "4.9.0",
+    "js-yaml": "4.3.2",
+    "mdast-util-from-markdown": "2.0.3",
+    "mdast-util-gfm": "3.1.0",
+    "micromark-extension-gfm": "3.0.0",
+    "oxlint": "1.81.0",
+    "oxlint-tsgolint": "7.0.2001",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.11"
+  },
+  "optionalDependencies": {
+    "@openai/codex": "0.153.4",
+    "@anthropic-ai/claude-agent-sdk": "0.3.263"
+  }
+}

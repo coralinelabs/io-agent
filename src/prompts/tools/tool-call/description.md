@@ -1,0 +1,1 @@
+Run one on-demand MCP tool by its exact name, with arguments matching its parameter schema from `tool_describe`. Approval and policy apply exactly as for a tool in your tool list, and the result is the tool's own result.

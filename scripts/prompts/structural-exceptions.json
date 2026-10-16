@@ -1,0 +1,22 @@
+[
+  {
+    "file": "src/library/execution/shell/pwsh-local/index.ts",
+    "expression": "'[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false); $OutputEncoding = [System.Text.UTF8Encoding]::new($false); '",
+    "reason": "Executable PowerShell encoding setup sent to the subprocess, not a model prompt."
+  },
+  {
+    "file": "src/library/execution/shell/shell-env/index.ts",
+    "expression": "'User directory holding the user-global AGENTS.md and skills.'",
+    "reason": "Catalog text for API callers of shellEnv.list(); no request or prompt carries it."
+  },
+  {
+    "file": "src/library/execution/shell/shell-env/index.ts",
+    "expression": "'Set to 1 in every shell a tool starts.'",
+    "reason": "Catalog text for API callers of shellEnv.list(); no request or prompt carries it."
+  },
+  {
+    "file": "src/library/execution/shell/shell-env/index.ts",
+    "expression": "'Id of the session whose tool started the shell, when a session did.'",
+    "reason": "Catalog text for API callers of shellEnv.list(); no request or prompt carries it."
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../../../../dist/library/runtime/vendor/cosmokit",
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "tsBuildInfoFile": "../../../../../.cache/cosmokit.tsbuildinfo",
+    "composite": true,
+    "incremental": true,
+    "strict": true,
+    "skipLibCheck": false,
+    "target": "ES2024",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "*.ts",
+    "**/*.ts"
+  ],
+  "references": []
+}

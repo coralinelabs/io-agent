@@ -1,0 +1,5 @@
+
+
+[... tool result middle pruned ...]
+
+

@@ -1,0 +1,1 @@
+Ask the user for a decision or missing information. Use mode="continue" when independent useful work can proceed: the question is saved under this session and returns a request_id immediately. The answer will arrive as later context, even after this turn finishes. Do not assume an answer or repeat a pending question. This tool is not permission to perform protected actions.

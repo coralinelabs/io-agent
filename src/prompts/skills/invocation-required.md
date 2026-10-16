@@ -1,0 +1,1 @@
+Resources for skill {{name}} are not authorized by a current direct user invocation. Ask the user to invoke /{{name}} again after a definition change or session reopen. Knowing its name does not authorize a user-only skill.

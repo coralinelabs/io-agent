@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.tsbuildinfo
+src/library/execution/native/prebuilds/
+**/prebuilds/
+.env
+.env.*
+*.log
+coverage/
+.cache/
+__pycache__/
+release/
+.pnpm-store/

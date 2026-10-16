@@ -1,0 +1,1 @@
+This is a bounded preview, not the complete skill catalog. Use skill_list to search or page through available metadata. Load a relevant skill with skill before applying it; read supporting text with skill_read only as needed.

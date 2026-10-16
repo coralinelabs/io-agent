@@ -1,0 +1,1 @@
+Run as an owned background job and return immediately. Collect progress and the final result with job_output; job_kill cancels it. The workflow survives ordinary turn completion, not a runtime restart.

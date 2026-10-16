@@ -1,0 +1,1 @@
+Required for apply: distinct package-relative paths and their complete replacement text. Null content deletes an existing text file. Omitted files remain unchanged. Deleting SKILL.md is valid only when the resulting package has no files.

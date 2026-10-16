@@ -1,0 +1,1 @@
+Atomically apply 1–64 non-overlapping replacements to this one file. Every old_string matches the same original snapshot, not earlier replacements. Failure of any edit leaves the file unchanged. Omit the top-level old_string, new_string, replace_all, and match_mode when using this array.

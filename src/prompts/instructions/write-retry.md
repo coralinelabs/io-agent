@@ -1,0 +1,1 @@
+This write or edit has not executed. Newly discovered workspace guidance must reach the model before a mutation. Read the pending instruction context on the next step, then retry the operation with any required changes. Do not use another tool to bypass the instruction check. If this repeats without new guidance, the host must check its tool policy ordering.

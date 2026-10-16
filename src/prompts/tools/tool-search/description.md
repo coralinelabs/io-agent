@@ -1,0 +1,1 @@
+Search the MCP tools that are available on demand (they are listed in the runtime context, not in your tool list) by keywords such as a server name, an action or an object. Returns matching tool names with short descriptions. Next, read their parameters with `tool_describe`, then run one with `tool_call`.

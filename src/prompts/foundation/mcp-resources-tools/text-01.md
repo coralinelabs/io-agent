@@ -1,0 +1,1 @@
+Configured MCP server name.

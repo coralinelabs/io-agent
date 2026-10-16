@@ -1,0 +1,1 @@
+Search and page through currently available model-invocable skill metadata without loading instruction bodies. Results are bounded; nextOffset continues this query, and skipped counts entries too large to return.

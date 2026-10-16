@@ -1,0 +1,12 @@
+allowBuilds:
+  esbuild: true
+  node-pty: true
+  koffi: true
+  '@google/genai': false
+  protobufjs: false
+peerDependencyRules:
+  allowedVersions:
+    typescript: '>=5 <7'
+patchedDependencies:
+  node-pty@1.2.0-beta.15: patches/node-pty@1.2.0-beta.15.patch
+  '@earendil-works/pi-ai@1.0.2': patches/pi-ai@1.0.2.patch

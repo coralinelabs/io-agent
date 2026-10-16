@@ -1,0 +1,1 @@
+/goal <objective>, /goal clear

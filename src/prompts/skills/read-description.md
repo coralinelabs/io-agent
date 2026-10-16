@@ -1,0 +1,1 @@
+Read a supporting UTF-8 text resource relative to a skill directory. This delegates to the ordinary read tool and preserves its restrictions, guards, read windows and cancellation. Does not run scripts or follow remote URLs. A user-only skill requires a direct user invocation in this live session; changed definitions require reinvocation.

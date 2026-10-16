@@ -1,0 +1,1 @@
+tool execution arguments must be losslessly JSON-serializable

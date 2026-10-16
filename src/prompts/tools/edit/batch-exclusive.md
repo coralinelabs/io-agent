@@ -1,0 +1,1 @@
+Use either old_string/new_string (and optional replace_all/match_mode) or edits, never both. All batch edits match the same original file; later edits cannot depend on text introduced by earlier edits.

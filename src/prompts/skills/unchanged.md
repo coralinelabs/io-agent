@@ -1,0 +1,1 @@
+Skill "{{name}}" is unchanged. Its complete instructions are still present earlier in the current context; use them. Supporting resources remain available through skill_read. If the full instructions leave the context, loading the skill returns them again.

@@ -1,0 +1,1 @@
+[{{value_1}}: verbatim read-only copy saved at {{value_2}}. Read that path with your file tools when its contents are needed; copy it to a writable location before modifying it. When delegating file work, include this saved path in the delegation prompt; only subagents sharing this execution environment can read it.]

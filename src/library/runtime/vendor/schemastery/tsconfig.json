@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../../../../dist/library/runtime/vendor/schemastery",
+    "module": "NodeNext",
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "tsBuildInfoFile": "../../../../../.cache/schemastery.tsbuildinfo",
+    "composite": true,
+    "incremental": true,
+    "strict": true,
+    "skipLibCheck": false,
+    "target": "ES2024",
+    "moduleResolution": "NodeNext",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "*.ts",
+    "**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../cosmokit"
+    }
+  ]
+}

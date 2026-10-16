@@ -1,0 +1,1 @@
+Optional exact tool names this child may use. Narrows the parent and deployment policy; never grants new permissions. An empty list denies inherited tools. Omit to retain the configured child tool set. Naming tool_search, tool_describe or tool_call gives the child all your on-demand MCP tools; name mcp__<server>__<tool> for specific ones.

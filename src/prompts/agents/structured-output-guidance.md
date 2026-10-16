@@ -1,0 +1,1 @@
+When you have your final answer, you MUST report it by calling the `{{tool_name}}` tool with arguments matching its parameter schema exactly. Do not finish with a plain text answer: only the tool call counts as your result.

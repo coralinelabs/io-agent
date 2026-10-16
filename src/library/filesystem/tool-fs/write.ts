@@ -1,0 +1,151 @@
+/**
+ * Model-facing full-file write. It obtains an optional intent from the single policy slot, calls
+ * `ctx.fs.writeText` without a stat, then records the resulting version; no policy means an
+ * unconditional atomic create-or-overwrite.
+ * @module io-agent/tool-fs/src/write
+ */
+
+import { modelText } from "../../context/text/index.ts"
+import type { Context } from "../../runtime/vendor/cordis/index.ts"
+import { defineTool } from "../../tools/index.ts"
+import type { DiffCallView, DiffResultView, ToolResult } from "../../tools/index.ts"
+import type { FsWriteOutcome } from "../fs/index.ts"
+import type {} from "../fs/index.ts"
+import { computeHunkDiffs, diffsFromMeta } from './diff.ts'
+import { remediateFsError } from './error.ts'
+import { sessionResolveOptions } from './session-cwd.ts'
+import type { FsSandboxController } from './sandbox.ts'
+
+/**
+ * Validate value constraints the schema DSL can't express: only a non-blank
+ * `file_path` — an empty `content` is legitimate (it writes an empty file).
+ * @param args - the schema-validated raw tool arguments.
+ * @returns the camelCased input; `content` passes through untouched.
+ */
+export function parseWriteArgs(args: { file_path: string; content: string }): { filePath: string; content: string } {
+  if (args.file_path.trim().length === 0) throw new Error(modelText('tools/write/path-required'))
+  return { filePath: args.file_path, content: args.content }
+}
+
+/**
+ * Format a write outcome as one model-facing text block body.
+ * @param displayPath - the backend-resolved path rendered in the envelope's `<path>` element.
+ * @param outcome - the write outcome; its `operation` selects the Created/Updated wording.
+ * @returns the model-facing confirmation envelope (no file content is echoed back).
+ */
+export function formatWriteOutput(displayPath: string, outcome: Pick<FsWriteOutcome, 'operation'>): string {
+  const verb = outcome.operation === 'create' ? modelText('tools/write/created-verb') : modelText('tools/write/updated-verb')
+  return modelText('tools/write/result', { path: displayPath, verb })
+}
+
+/**
+ * The `write` tool's validated arguments: the base parameters plus the
+ * two escalation fields, advertised only under a confining `ctx.fs` (absent
+ * from the schema otherwise, so the validator rejects them before `execute`).
+ */
+interface WriteToolArgs {
+  file_path: string
+  content: string
+  sandbox_permissions?: string
+  justification?: string
+}
+
+/**
+ * Register the `write` tool and its scope-aware system-prompt guidance.
+ * @param ctx - the plugin context; registrations are effects scoped to it, and execution uses its `fs` service.
+ * @param sandbox - the shared sandbox-escalation API (advertisement, mode stamping, denial mapping).
+ */
+export function applyWriteTool(ctx: Context, sandbox: FsSandboxController): void {
+  ctx.systemPrompt.section({
+    name: 'tool:write',
+    order: ctx.systemPrompt.getSectionOrder('TOOL_WRITE'),
+    text: ({ scope }) => ctx.tools.get('write', scope) === undefined
+      ? ''
+      : modelText('tools/write/guidance-base')
+        + (ctx.tools.get('edit', scope) === undefined ? '' : modelText('tools/write/prefer-edit'))
+        + '.',
+  })
+
+  ctx.tools.register(defineTool({
+    name: 'write',
+    description: modelText('tools/write/description-01'),
+    parameters: {
+      file_path: { type: 'string', required: true, description: modelText('tools/write/description-02') },
+      content: { type: 'string', required: true, description: modelText('tools/write/description-03') },
+      ...sandbox.escalationModes.length > 0 ? sandbox.schemaFields() : {},
+    },
+    output: {
+      schema: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          path: { type: 'string', required: true },
+          operation: { type: 'string', required: true, enum: ['create', 'update'] },
+          before: {
+            required: true,
+            oneOf: [
+              { type: 'string' },
+              { type: 'null' },
+            ],
+          },
+          after: { type: 'string', required: true },
+        },
+      },
+      render: (_args, value) => [{ type: 'text', text: formatWriteOutput(value.path, value) }],
+      presentationMeta: (args, value) => ({
+        operation: value.operation,
+        diffs: value.before === null
+          ? []
+          : computeHunkDiffs(args.file_path, value.before, value.after)
+            .map(({ path, oldText, newText }) => ({ path, oldText, newText })),
+      }),
+    },
+    async execute(args: WriteToolArgs, exec) {
+      const input = parseWriteArgs(args)
+      // Resolve the per-call sandbox policy (approved mode > session override
+      // > backend default, plus the session cwd root) BEFORE anything executes;
+      // an escalating call throws its distinct text on any non-grant.
+      const sandboxPolicy = await sandbox.resolvePolicy('write', args, exec)
+      const target = await ctx.fs.resolve(input.filePath, sessionResolveOptions(exec, sandboxPolicy?.workspaceRoot))
+      // Single-slot decision: the policy plugin produces createIfAbsent/
+      // replaceIfVersion; the bare default is undefined (unconditional). No stat.
+      const intent = await ctx.waterfall('fs/write-intent', target, exec, () => undefined)
+      await ctx.serial('fs/before-change', target, exec)
+      let outcome: FsWriteOutcome
+      try {
+        outcome = await ctx.fs.writeText(target, input.content, intent, exec.signal, sandboxPolicy)
+      } catch (error: unknown) {
+        // A sandbox denial becomes the shared [sandbox: …] marker (the model
+        // recognizes it from bash); guarded mutation failures receive their
+        // stable model-facing diagnostic; anything else passes through.
+        throw remediateFsError(sandbox.mapError(error, sandboxPolicy), target.displayPath)
+      }
+      ctx.emit('fs/observed', target, { kind: 'present', version: outcome.version }, exec)
+      return {
+        path: target.displayPath,
+        operation: outcome.operation,
+        before: outcome.before,
+        after: outcome.after,
+      }
+    },
+    // Pure display: a diff card. A call-time presenter has no access to prior
+    // file content, so `oldText: null` also represents an overwrite here.
+    presentCall(args): DiffCallView {
+      return {
+        card: 'diff',
+        title: `Write ${args.file_path}`,
+        diffs: [{ path: args.file_path, oldText: null, newText: args.content }],
+        locations: [{ path: args.file_path }],
+      }
+    },
+    // Result-time display repeats the diff because completed views replace the
+    // pending view. Overwrites use applied metadata; creates and identical
+    // overwrites use the replay-safe args fallback.
+    presentResult(args, result: ToolResult): DiffResultView | undefined {
+      if (result.isError) return undefined
+      const diffs = diffsFromMeta(result.meta)
+        ?? [{ path: args.file_path, oldText: null, newText: args.content }]
+      return { card: 'diff', title: `Write ${args.file_path}`, diffs }
+    },
+  }))
+}

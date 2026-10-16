@@ -1,0 +1,1 @@
+Skill package request rejected ({{code}}). Inspect the named userspace package, preserve files you did not intend to change, and send a valid revision and complete operations. No approval is implied by this error.

@@ -1,0 +1,1 @@
+Unchanged: {{path}} lines {{range}} are identical to the earlier read result for these lines, which is still shown above. Use that result instead of reading again; if it is later removed or shortened, read again for the full content.

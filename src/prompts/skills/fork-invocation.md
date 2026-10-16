@@ -1,0 +1,1 @@
+The user explicitly invoked the isolated skill "{{name}}" with arguments {{arguments_json}}. Invoke the skill tool with that exact name and arguments. Its instructions belong in a fresh child context, not this conversation. This invocation does not broaden permissions or authorize repeated execution.

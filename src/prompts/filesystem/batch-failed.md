@@ -1,0 +1,1 @@
+The file batch failed: {{reason}}. Recovery status: {{status}}. Paths whose final state is uncertain: {{paths}}. When status is partial, inspect those paths before continuing. A process crash is not covered by in-memory rollback.

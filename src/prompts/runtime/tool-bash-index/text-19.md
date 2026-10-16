@@ -1,0 +1,1 @@
+Kill the command if it is still running after this many milliseconds. Without it, a command that outlasts the default wait is not killed: it continues in the background and the result gives its job id.

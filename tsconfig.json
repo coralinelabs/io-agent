@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".cache/types.tsbuildinfo",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "rewriteRelativeImportExtensions": true,
+    "allowImportingTsExtensions": true,
+    "types": [
+      "node"
+    ],
+    "skipLibCheck": false,
+    "composite": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/library/runtime/vendor/**"
+  ],
+  "references": [
+    {
+      "path": "src/library/runtime/vendor/cosmokit"
+    },
+    {
+      "path": "src/library/runtime/vendor/cordis"
+    },
+    {
+      "path": "src/library/runtime/vendor/schemastery"
+    },
+    {
+      "path": "src/library/runtime/vendor/timer"
+    }
+  ]
+}
